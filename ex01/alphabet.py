@@ -4,7 +4,7 @@ import string
 
 sub_alf = 10 #対象文字数
 def_alf = 2 #欠損文字数
-n = 2 #挑戦回数
+challenge = 2 #挑戦回数
 alp_lst = random.sample(string.ascii_uppercase, sub_alf)
 
 
@@ -48,7 +48,7 @@ def kaitou(abs_chars):
 
 if __name__ == "__main__":
     st = datetime.datetime.now()
-    for _ in range(n):
+    for _ in range(challenge):
         abs_chars = shutudai(alp_lst)
         ret = kaitou(abs_chars)
         if ret:
