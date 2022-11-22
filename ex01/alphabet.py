@@ -47,6 +47,7 @@ def kaitou(abs_chars):
 
 
 if __name__ == "__main__":
+    st = datetime.datetime.now()
     for _ in range(n):
         abs_chars = shutudai(alp_lst)
         ret = kaitou(abs_chars)
@@ -54,3 +55,5 @@ if __name__ == "__main__":
             break
         else:
             print("-"*20)
+    ed = datetime.datetime.now()
+    print(f"実行時間：{(ed-st).seconds}秒")
