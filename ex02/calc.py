@@ -31,4 +31,14 @@ for num in range(9, -1, -1):
         r += 1
         c = 0
 
+operators = ["+", "="] #+と=のリストを作成
+for ope in operators: #リストの要素ぶん回す
+    buttun = tk.Button(root, text=f"{ope}", font=("", 30), width=4, height=2)
+    buttun.grid(row=r, column=c) #ボタンを描画,配置
+    c += 1
+    if c%3 == 0:
+        r += 1
+        c = 0
+
+
 root.mainloop() #ウィンドウを表示
