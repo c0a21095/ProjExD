@@ -30,26 +30,18 @@ def button_click(event):
             entry.insert(tk.END, txt) #押された文字列を挿入する
 
 
-r, c = 2, 2 #rowとcolumnの初期値を設定
-for num in range(9, -1, -1):
-    #ボタンを描画する。(ウィンドウインスタンス、ボタンの文字列、フォントタイプ・サイズ、幅、高さ)
-    num = tk.Button(root, text=f"{num}", font=("", 30), width=4, height=2)
-
-    #ボタンとメッセージボックスのイベントを紐づける
-    num.bind("<1>", button_click)
-
-    #ボタンを配置する。grid(row=行数、column=列数)、左上が(0,0)で下(右)に行くにつれて増える
-    num.grid(row=r, column=c)
-    c -= 1
-    if c%3 == 2: #左端に来たら
-        r += 1 #1行下に
-        if r == 5:
-            c = 0 #0の時だけ真ん中にする
-        else:
-            c = 2 #それ以外は右端に戻す
-
-#四則演算,クリアボタンを実装
-operators = [
+#ボタンのリスト
+buttuns = [
+    ["0", "5", "0"], #0ボタンの文字,row,column
+    ["1", "4", "0"], #1ボタンの文字,row,column
+    ["2", "4", "1"], #2ボタンの文字,row,column
+    ["3", "4", "2"], #3ボタンの文字,row,column
+    ["4", "3", "0"], #4ボタンの文字,row,column
+    ["5", "3", "1"], #5ボタンの文字,row,column
+    ["6", "3", "2"], #6ボタンの文字,row,column
+    ["7", "2", "0"], #7ボタンの文字,row,column
+    ["8", "2", "1"], #8ボタンの文字,row,column
+    ["9", "2", "2"], #9ボタンの文字,row,column
     ["C", "1", "0"], #クリアボタンの文字,row,column
     ["/", "1", "3"], #割り算ボタンの文字,row,column
     ["*", "2", "3"], #掛け算ボタンの文字,row,column
@@ -59,9 +51,9 @@ operators = [
     [".", "5", "2"], #小数点の文字,row,column
     ["00", "5", "1"]] #00ボタンの文字,row,column
 
-for i in range(len(operators)): #リストの要素ぶん回す
-    buttun = tk.Button(root, text=f"{operators[i][0]}", font=("", 30), width=4, height=2)
+for i in range(len(buttuns)): #リストの要素ぶん回す
+    buttun = tk.Button(root, text=f"{buttuns[i][0]}", font=("", 30), width=4, height=2)
     buttun.bind("<1>", button_click)
-    buttun.grid(row=int(operators[i][1]), column=int(operators[i][2])) #ボタンを描画,配置
+    buttun.grid(row=int(buttuns[i][1]), column=int(buttuns[i][2])) #ボタンを描画,配置
 
 root.mainloop() #ウィンドウを表示
