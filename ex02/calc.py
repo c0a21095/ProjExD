@@ -12,14 +12,16 @@ entry.grid(row=0,column=0, columnspan=3)#3グリッドに跨って描画
 #ボタンを押されたときに表示するメッセージボックスの関数
 def button_click(event):
     btn = event.widget
-    txt = btn["text"]
-    tkm.showinfo(txt, f"{txt}のボタンがクリックされました")
+    txt = btn["text"] #text部分を取得
+    #tkm.showinfo(txt, f"{txt}のボタンがクリックされました")
+    entry.insert(tk.END, txt)
+
 
 
 r, c = 1, 0
 for num in range(9, -1, -1):
     #ボタンを描画する。(ウィンドウインスタンス、ボタンの文字列、フォントタイプ・サイズ、幅、高さ)
-    num = tk.Button(root, text=str(num), font=("", 30), width=4, height=2)
+    num = tk.Button(root, text=f"{num}", font=("", 30), width=4, height=2)
 
     #ボタンとメッセージボックスのイベントを紐づける
     num.bind("<1>", button_click)
