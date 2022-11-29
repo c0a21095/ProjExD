@@ -2,7 +2,7 @@ import tkinter as tk
 import tkinter.messagebox as tkm
 
 root = tk.Tk() #ウィンドウを作成
-root.title("tk") #ウィンドウ名を設定
+root.title("電卓") #ウィンドウ名を設定
 root.geometry("300x500") #ウィンドウサイズを設定
 
 entry = tk.Entry(root, justify="right", width=10, font=("", 40)) #入力欄を描画
@@ -24,7 +24,7 @@ def button_click(event):
 
 
 
-r, c = 1, 0
+r, c = 1, 2 #rowとcolumnの初期値を設定
 for num in range(9, -1, -1):
     #ボタンを描画する。(ウィンドウインスタンス、ボタンの文字列、フォントタイプ・サイズ、幅、高さ)
     num = tk.Button(root, text=f"{num}", font=("", 30), width=4, height=2)
@@ -34,11 +34,16 @@ for num in range(9, -1, -1):
 
     #ボタンを配置する。grid(row=行数、column=列数)、左上が(0,0)で下(右)に行くにつれて増える
     num.grid(row=r, column=c)
-    c += 1
-    if c%3 == 0:
-        r += 1
-        c = 0
+    c -= 1
+    if c%3 == 2: #左端に来たら
+        r += 1 #1行下に
+        if r == 4:
+            c = 1 #0の時だけ真ん中にする
+        else:
+            c = 2 #それ以外は右端に戻す
 
+
+'''
 operators = ["+", "="] #+と=のリストを作成
 for ope in operators: #リストの要素ぶん回す
     buttun = tk.Button(root, text=f"{ope}", font=("", 30), width=4, height=2)
@@ -48,6 +53,7 @@ for ope in operators: #リストの要素ぶん回す
     if c%3 == 0:
         r += 1
         c = 0
+'''
 
 
 root.mainloop() #ウィンドウを表示
