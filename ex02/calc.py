@@ -13,11 +13,14 @@ entry.grid(row=0,column=0, columnspan=3)#3グリッドに跨って描画
 def button_click(event):
     btn = event.widget
     txt = btn["text"] #text部分を取得
-    if num == "=": #イコールなら
-        pass
+    if txt == "=": #イコールなら
+        formula = entry.get() #文字列を取得
+        res = eval(formula) #数式なら、計算する
+        entry.delete(0, tk.END) #表示内容を削除する
+        entry.insert(tk.END, res) #結果を挿入する
     else: #イコール以外のボタンなら
         #tkm.showinfo(txt, f"{txt}のボタンがクリックされました")
-        entry.insert(tk.END, txt)
+        entry.insert(tk.END, txt) #押された文字列を挿入する
 
 
 
