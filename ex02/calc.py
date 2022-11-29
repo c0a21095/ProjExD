@@ -13,7 +13,7 @@ ope_list = ["+", "-", "*", "/", "."] #演算子のリスト
 def button_click(event):
     btn = event.widget
     txt = btn["text"] #text部分を取得
-    check = entry.get()
+    check = entry.get() #入力情報を取得
     if txt == "C": #クリアボタンが押されたならば
         entry.delete(0, tk.END) #結果を削除する
     elif txt == "=": #イコールなら
@@ -28,9 +28,6 @@ def button_click(event):
             pass #入力を受け付けない
         else: #そうでなければ
             entry.insert(tk.END, txt) #押された文字列を挿入する
-
-            
-
 
 
 r, c = 2, 2 #rowとcolumnの初期値を設定
@@ -47,7 +44,7 @@ for num in range(9, -1, -1):
     if c%3 == 2: #左端に来たら
         r += 1 #1行下に
         if r == 5:
-            c = 1 #0の時だけ真ん中にする
+            c = 0 #0の時だけ真ん中にする
         else:
             c = 2 #それ以外は右端に戻す
 
@@ -59,13 +56,12 @@ operators = [
     ["-", "3", "3"], #引き算ボタンの文字,row,column
     ["+", "4", "3"], #足し算ボタンの文字,row,column
     ["=", "5", "3"], #イコールボタンの文字,row,column
-    [".", "5", "2"]] #小数点の文字,row,column
+    [".", "5", "2"], #小数点の文字,row,column
+    ["00", "5", "1"]] #00ボタンの文字,row,column
 
 for i in range(len(operators)): #リストの要素ぶん回す
     buttun = tk.Button(root, text=f"{operators[i][0]}", font=("", 30), width=4, height=2)
     buttun.bind("<1>", button_click)
     buttun.grid(row=int(operators[i][1]), column=int(operators[i][2])) #ボタンを描画,配置
-
-
 
 root.mainloop() #ウィンドウを表示
