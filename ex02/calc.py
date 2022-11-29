@@ -13,8 +13,11 @@ entry.grid(row=0,column=0, columnspan=3)#3グリッドに跨って描画
 def button_click(event):
     btn = event.widget
     txt = btn["text"] #text部分を取得
-    #tkm.showinfo(txt, f"{txt}のボタンがクリックされました")
-    entry.insert(tk.END, txt)
+    if num == "=": #イコールなら
+        pass
+    else: #イコール以外のボタンなら
+        #tkm.showinfo(txt, f"{txt}のボタンがクリックされました")
+        entry.insert(tk.END, txt)
 
 
 
@@ -36,6 +39,7 @@ for num in range(9, -1, -1):
 operators = ["+", "="] #+と=のリストを作成
 for ope in operators: #リストの要素ぶん回す
     buttun = tk.Button(root, text=f"{ope}", font=("", 30), width=4, height=2)
+    buttun.bind("<1>", button_click)
     buttun.grid(row=r, column=c) #ボタンを描画,配置
     c += 1
     if c%3 == 0:
