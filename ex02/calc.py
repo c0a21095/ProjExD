@@ -4,25 +4,32 @@ import tkinter.messagebox as tkm
 root = tk.Tk() #ウィンドウを作成
 root.title("電卓") #ウィンドウ名を設定
 root.geometry("400x600") #ウィンドウサイズを設定
-
 entry = tk.Entry(root, justify="right", width=10, font=("", 40)) #入力欄を描画
 entry.grid(row=0,column=0, columnspan=4)#4グリッドに跨って描画
+ope_list = ["+", "-", "*", "/", "."] #演算子のリスト
 
 
 #ボタンを押されたときに表示するメッセージボックスの関数
 def button_click(event):
     btn = event.widget
     txt = btn["text"] #text部分を取得
-    if txt == "=": #イコールなら
-        formula = entry.get() #文字列を取得
-        res = eval(formula) #数式なら、計算する
-        entry.delete(0, tk.END) #表示内容を削除する
-        entry.insert(tk.END, res) #結果を挿入する
-    elif txt == "C": #クリアボタンなら
-        entry.delete(0, tk.END)
-    else: #イコール以外のボタンなら
-        #tkm.showinfo(txt, f"{txt}のボタンがクリックされました")
+    check = entry.get()
+    if txt == "C": #クリアボタンが押されたならば
+        entry.delete(0, tk.END) #結果を削除する
+    elif txt == "=": #イコールなら
+            formula = entry.get() #文字列を取得
+            res = eval(formula) #数式なら、計算する
+            entry.delete(0, tk.END) #表示内容を削除する
+            entry.insert(tk.END, res) #結果を挿入する
+    elif txt not in ope_list: #数字ボタンが押されたならば
         entry.insert(tk.END, txt) #押された文字列を挿入する
+    else: #それ以外(クリアボタン,数字ボタン以外)の場合
+        if len(check) == 0 or check[-1] in ope_list: #演算子が連続するか、先頭に来るなら
+            pass #入力を受け付けない
+        else: #そうでなければ
+            entry.insert(tk.END, txt) #押された文字列を挿入する
+
+            
 
 
 
