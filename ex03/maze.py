@@ -23,6 +23,11 @@ def main_proc():
     if key == "Down" : my += 1 #下方向への移動
     if key == "Left" : mx -= 1 #左方向への移動
     if key == "Right": mx += 1 #右方向への移動
+    if maze_lst[mx][my] == 1:  #移動先が壁であれば
+            if key == "Up"   : my += 1 #上方向への移動(戻す)
+            if key == "Down" : my -= 1 #下方向への移動(戻す)
+            if key == "Left" : mx += 1 #左方向への移動(戻す)
+            if key == "Right": mx -= 1 #右方向への移動(戻す)
     cx, cy = mx*100+50, my*100+50 #マス単位で移動するように値を代入
     canvas.coords("kokaton", cx, cy) #tag"kokaton"を動かす
     root.after(100, main_proc) #100ミリ秒後にもう一度main_procを動かす
