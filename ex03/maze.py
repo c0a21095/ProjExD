@@ -18,11 +18,12 @@ def key_up(event):
 
 #リアルタイム処理をするmain_proc関数
 def main_proc():
-    global cx, cy #こうかとんの座標をグローバル宣言
-    if key == "Up"   : cy -= 20 #上方向への移動
-    if key == "Down" : cy += 20 #下方向へ移動
-    if key == "Left" : cx -= 20 #左方向へ移動
-    if key == "Right": cx += 20 #右方向へ移動
+    global cx, cy, mx, my #こうかとんの座標,マス番号をグローバル宣言
+    if key == "Up"   : my -= 1 #上方向への移動
+    if key == "Down" : my += 1 #下方向への移動
+    if key == "Left" : mx -= 1 #左方向への移動
+    if key == "Right": mx += 1 #右方向への移動
+    cx, cy = mx*100+50, my*100+50 #マス単位で移動するように値を代入
     canvas.coords("kokaton", cx, cy) #tag"kokaton"を動かす
     root.after(100, main_proc) #100ミリ秒後にもう一度main_procを動かす
 
@@ -35,13 +36,16 @@ if __name__ == "__main__":
     canvas.pack() #キャンバスをpackする
 
     maze_lst = mm.make_maze(15,9) #15(ヨコ)x9(タテ)の迷路(2次元リスト)を作成,1が壁,0が床
-    mm.show_maze(canvas, maze_lst) #作成した迷路を描画する,
+    mm.show_maze(canvas, maze_lst) #作成した迷路を描画する
 
-    cx, cy = 300, 400 #こうかとんのx座標,y座標
+    mx, my = 1, 1 #マス番号を初期化
+    cx, cy = mx*100+50, my*100+50 #こうかとんのx座標,y座標
     kokaton = tk.PhotoImage(file="fig/8.png") #こうかとんの画像ファイルを指定
+
     key = "" #変数keyを空文字""で初期化
+    canvas.create_image(cx, cy, image=kokaton, tag="kokaton") #キャンバス上にこうかとんを配置
+    
     root.bind("<KeyPress>", key_down) #keyが押されたらkey_down関数を呼び出す
     root.bind("<KeyRelease>", key_up) #keyが離されたらkey_up関数を呼び出す
-    canvas.create_image(cx, cy, image=kokaton, tag="kokaton") #キャンバス上にこうかとんを配置
     main_proc() #main_proc関数を呼び出す
     root.mainloop() #ウィンドウを表示
