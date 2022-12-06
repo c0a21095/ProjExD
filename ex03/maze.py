@@ -39,11 +39,16 @@ def main_proc():
     canvas.delete("kokaton") #前に描いたこうかとんを削除
     canvas.create_image(cx, cy, image=kokaton, tag="kokaton") #キャンバス上にこうかとんを配置
     #canvas.coords("kokaton", cx, cy) #tag"kokaton"を動かす
+    goal_judge(cx, cy)
+
+
+#ゴールを判定する関数
+def goal_judge(cx,cy):
     if cx == 1350 and cy == 750: #ゴールにたどり着いたら
         tkm.showinfo("ゲームクリア",f"ゴールにたどり着きました！あなたは{count}手でゴールしました") #メッセージボックスを表示
     else: #ゴールにたどり着かなかったら
         root.after(100, main_proc) #100ミリ秒後にもう一度main_procを動かす
-        
+
 
 #コマンドラインから実行されたら
 if __name__ == "__main__":
