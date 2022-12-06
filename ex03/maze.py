@@ -6,9 +6,9 @@ import maze_maker as mm
 
 #key_down関数
 def key_down(event):
-    global key #keyをグローバル宣言
+    global key, count #keyをグローバル宣言
     key = event.keysym #押されたキーのシンボルをkeyに代入する
-
+    count += 1 #手数をカウント
 
 #key_up関数
 def key_up(event):
@@ -29,8 +29,11 @@ def main_proc():
             mx += 1 #右方向へ移動する
     cx, cy = mx*100+50, my*100+50 #マス単位で移動するように値を代入
     canvas.coords("kokaton", cx, cy) #tag"kokaton"を動かす
-    root.after(100, main_proc) #100ミリ秒後にもう一度main_procを動かす
-
+    if cx == 1350 and cy == 750: #ゴールにたどり着いたら
+        tkm.showinfo("ゲームクリア",f"ゴールにたどり着きました！あなたは{count}手でゴールしました") #メッセージボックスを表示
+    else: #ゴールにたどり着かなかったら
+        root.after(100, main_proc) #100ミリ秒後にもう一度main_procを動かす
+        
 
 #コマンドラインから実行されたら
 if __name__ == "__main__":
@@ -44,8 +47,9 @@ if __name__ == "__main__":
     cx, cy = mx*100+50, my*100+50 #こうかとんのx座標,y座標
     kokaton = tk.PhotoImage(file="fig/2.png") #こうかとんの画像ファイルを指定
     key = "" #変数keyを空文字""で初期化
-    start = canvas.create_rectangle(100,100,200,200,fill="green", tags="goal")
-    goal  = canvas.create_rectangle(1300,700,1400,800,fill="red", tags="goal")
+    count = 0
+    start = canvas.create_rectangle(100,100,200,200,fill="green", tags="goal") #緑色のスタートを表示
+    goal  = canvas.create_rectangle(1300,700,1400,800,fill="red", tags="goal") #赤色のゴールを表示
     canvas.create_image(cx, cy, image=kokaton, tag="kokaton") #キャンバス上にこうかとんを配置
     root.bind("<KeyPress>", key_down) #keyが押されたらkey_down関数を呼び出す
     root.bind("<KeyRelease>", key_up) #keyが離されたらkey_up関数を呼び出す
