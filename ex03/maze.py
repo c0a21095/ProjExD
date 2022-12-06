@@ -44,6 +44,8 @@ if __name__ == "__main__":
     cx, cy = mx*100+50, my*100+50 #こうかとんのx座標,y座標
     kokaton = tk.PhotoImage(file="fig/2.png") #こうかとんの画像ファイルを指定
     key = "" #変数keyを空文字""で初期化
+    start = canvas.create_rectangle(100,100,200,200,fill="green", tags="goal")
+    goal  = canvas.create_rectangle(1300,700,1400,800,fill="red", tags="goal")
     canvas.create_image(cx, cy, image=kokaton, tag="kokaton") #キャンバス上にこうかとんを配置
     root.bind("<KeyPress>", key_down) #keyが押されたらkey_down関数を呼び出す
     root.bind("<KeyRelease>", key_up) #keyが離されたらkey_up関数を呼び出す
