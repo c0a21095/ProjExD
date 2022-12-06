@@ -6,9 +6,8 @@ import maze_maker as mm
 
 #key_down関数
 def key_down(event):
-    global key, count #keyをグローバル宣言
+    global key #keyをグローバル宣言
     key = event.keysym #押されたキーのシンボルをkeyに代入する
-    count += 1 #手数をカウント
 
 #key_up関数
 def key_up(event):
@@ -18,17 +17,27 @@ def key_up(event):
 
 #リアルタイム処理をするmain_proc関数
 def main_proc():
-    global cx, cy, mx, my #こうかとんの座標,マス番号をグローバル宣言
+    global cx, cy, mx, my, count, kokaton #こうかとんの座標,マス番号をグローバル宣言
     if key == "Up"    and maze_lst[mx][my-1] != 1: #上キーが押され、移動先が壁でなければ
             my -= 1 #上方向へ移動する
+            count += 1 #手数をカウント
+            kokaton = tk.PhotoImage(file="fig/6.png") #上向きのこうかとんに設定
     if key == "Down"  and maze_lst[mx][my+1] != 1: #下キーが押され、移動先が壁でなければ
             my += 1 #下方向へ移動する
+            count += 1 #手数をカウント
+            kokaton = tk.PhotoImage(file="fig/8.png") #下向きのこうかとんに設定
     if key == "Left"  and maze_lst[mx-1][my] != 1: #左キーが押され、移動先が壁でなければ
             mx -= 1 #左方向へ移動する
+            count += 1 #手数をカウント
+            kokaton = tk.PhotoImage(file="fig/5.png") #左向きのこうかとんに設定
     if key == "Right" and maze_lst[mx+1][my] != 1: #右キーが押され、移動先が壁でなければ
             mx += 1 #右方向へ移動する
+            count += 1 #手数をカウント
+            kokaton = tk.PhotoImage(file="fig/2.png") #右向きのこうかとんに設定
     cx, cy = mx*100+50, my*100+50 #マス単位で移動するように値を代入
-    canvas.coords("kokaton", cx, cy) #tag"kokaton"を動かす
+    canvas.delete("kokaton") #前に描いたこうかとんを削除
+    canvas.create_image(cx, cy, image=kokaton, tag="kokaton") #キャンバス上にこうかとんを配置
+    #canvas.coords("kokaton", cx, cy) #tag"kokaton"を動かす
     if cx == 1350 and cy == 750: #ゴールにたどり着いたら
         tkm.showinfo("ゲームクリア",f"ゴールにたどり着きました！あなたは{count}手でゴールしました") #メッセージボックスを表示
     else: #ゴールにたどり着かなかったら
@@ -45,12 +54,12 @@ if __name__ == "__main__":
     mm.show_maze(canvas, maze_lst) #作成した迷路を描画する
     mx, my = 1, 1 #マス番号を初期化
     cx, cy = mx*100+50, my*100+50 #こうかとんのx座標,y座標
-    kokaton = tk.PhotoImage(file="fig/2.png") #こうかとんの画像ファイルを指定
+    kokaton = tk.PhotoImage(file="fig/0.png") #こうかとんの画像ファイルを指定
     key = "" #変数keyを空文字""で初期化
-    count = 0
+    count = 0 #手数をカウント,初期値0
     start = canvas.create_rectangle(100,100,200,200,fill="green", tags="goal") #緑色のスタートを表示
     goal  = canvas.create_rectangle(1300,700,1400,800,fill="red", tags="goal") #赤色のゴールを表示
-    canvas.create_image(cx, cy, image=kokaton, tag="kokaton") #キャンバス上にこうかとんを配置
+    #canvas.create_image(cx, cy, image=kokaton, tag="kokaton") #キャンバス上にこうかとんを配置
     root.bind("<KeyPress>", key_down) #keyが押されたらkey_down関数を呼び出す
     root.bind("<KeyRelease>", key_up) #keyが離されたらkey_up関数を呼び出す
     main_proc() #main_proc関数を呼び出す
