@@ -9,6 +9,7 @@ def main():
     canvas.pack() #キャンバスをpackする
     cx, cy = 300, 400 #こうかとんのx座標,y座標
     kokaton = tk.PhotoImage(file="fig/8.png") #こうかとんの画像ファイルを指定
+    key = "" #変数keyを空文字""で初期化
     canvas.create_image(cx, cy, image=kokaton, tag="kokaton") #キャンバス上にこうかとんを配置
     root.mainloop() #ウィンドウを表示
 
