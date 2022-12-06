@@ -1,5 +1,6 @@
 import tkinter as tk
 import tkinter.messagebox as tkm
+import maze_maker as mm
 #必要なモジュールの呼び出し
 
 
@@ -32,6 +33,10 @@ if __name__ == "__main__":
     root.title("迷えるこうかとん") #ウィンドウ名を設定
     canvas = tk.Canvas(root, width=1500, height=900, bg="black") #キャンバスを描画
     canvas.pack() #キャンバスをpackする
+
+    maze_lst = mm.make_maze(15,9) #15(ヨコ)x9(タテ)の迷路(2次元リスト)を作成,1が壁,0が床
+    mm.show_maze(canvas, maze_lst) #作成した迷路を描画する,
+
     cx, cy = 300, 400 #こうかとんのx座標,y座標
     kokaton = tk.PhotoImage(file="fig/8.png") #こうかとんの画像ファイルを指定
     key = "" #変数keyを空文字""で初期化
