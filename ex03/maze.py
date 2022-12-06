@@ -9,6 +9,7 @@ def key_down(event):
     global key #keyをグローバル宣言
     key = event.keysym #押されたキーのシンボルをkeyに代入する
 
+
 #key_up関数
 def key_up(event):
     global key #keyをグローバル宣言
