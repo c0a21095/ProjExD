@@ -16,7 +16,11 @@ def main():
     pg_bg_rct = pg_bg_sfc.get_rect() #rectを取り出す
     scrn_sfc.blit(pg_bg_sfc, pg_bg_rct) #rectに従い背景を設定
 
-    tori_sfc = pg.image.load("fig/0.png") #surfaceオブジェクトとして画像を読み込む
+    tori_up = pg.image.load("fig/6.png") #上向きのこうかとん
+    tori_down = pg.image.load("fig/8.png") #下向きのこうかとん
+    tori_reft = pg.image.load("fig/5.png") #左向きのこうかとん
+    tori_right = pg.image.load("fig/2.png") #右向きのこうかとん
+    tori_sfc = pg.image.load("fig/0.png") #surfaceオブジェクトとして画像を読み込む,初期状態
     tori_sfc = pg.transform.rotozoom(tori_sfc, 0, 2.0) #画像の大きさを変える。画像surface,回転角,大きさの比率
     tori_rct = tori_sfc.get_rect() #rectを取り出す
     tori_rct.center = 900, 400 #900,400の位置に配置する
@@ -55,19 +59,19 @@ def main():
         key_dict = pg.key.get_pressed() #すべてのキーの入力状態に関する辞書を返す
         if key_dict[pg.K_UP]    and tori_rct.top-1    > scrn_rct.top: #上キーが押され、移動先が壁でなければ
             tori_rct.centery -= 1 #上方向に移動
-            tori_sfc = pg.image.load("fig/6.png") #上向きのこうかとんに設定
+            tori_sfc = tori_up #上向きのこうかとんに設定
             tori_sfc = pg.transform.rotozoom(tori_sfc, 0, 2.0) #画像の大きさを変える。画像surface,回転角,大きさの比率
         if key_dict[pg.K_DOWN]  and tori_rct.bottom+1 < scrn_rct.bottom: #下キーが押され、移動先が壁でなければ
             tori_rct.centery += 1 #下方向に移動
-            tori_sfc = pg.image.load("fig/8.png") #下向きのこうかとんに設定
+            tori_sfc = tori_down #下向きのこうかとんに設定
             tori_sfc = pg.transform.rotozoom(tori_sfc, 0, 2.0) #画像の大きさを変える。画像surface,回転角,大きさの比率
         if key_dict[pg.K_LEFT]  and tori_rct.left-1   > scrn_rct.left: #左キーが押され、移動先が壁でなければ
             tori_rct.centerx -= 1 #左方向に移動
-            tori_sfc = pg.image.load("fig/5.png") #左向きのこうかとんに設定
+            tori_sfc = tori_reft #左向きのこうかとんに設定
             tori_sfc = pg.transform.rotozoom(tori_sfc, 0, 2.0) #画像の大きさを変える。画像surface,回転角,大きさの比率
         if key_dict[pg.K_RIGHT] and tori_rct.right+1  < scrn_rct.right: #右キーが押され、移動先が壁でなければ
             tori_rct.centerx += 1 #右方向に移動
-            tori_sfc = pg.image.load("fig/2.png") #右向きのこうかとんに設定
+            tori_sfc = tori_right #右向きのこうかとんに設定
             tori_sfc = pg.transform.rotozoom(tori_sfc, 0, 2.0) #画像の大きさを変える。画像surface,回転角,大きさの比率
 
         scrn_sfc.blit(tori_sfc, tori_rct) #scrn_sfcにtori_sfcを貼り付ける。tori_rctに従って
