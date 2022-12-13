@@ -7,10 +7,17 @@ import sys
 def main():
     clock = pg.time.Clock() #時間計測用のオブジェクト
 
+    #初期配置
     pg.display.set_caption("逃げろ！こうかとん") #ウィンドウ名
     scrn_sfc = pg.display.set_mode((1600, 900)) #ウィンドウサイズ
     pg_bg_sfc = pg.image.load("fig/pg_bg.jpg") #背景画像を指定
     pg_bg_rct = pg_bg_sfc.get_rect() #rectを取り出す
+
+    tori_sfc = pg.image.load("fig/6.png") #surfaceオブジェクトとして画像を読み込む
+    tori_sfc = pg.transform.rotozoom(tori_sfc, 0, 2.0) #画像の大きさを変える。画像surface,回転角,大きさの比率
+    tori_rct = tori_sfc.get_rect() #rectを取り出す
+    tori_rct.center = 900, 400 #400,300の位置に配置する
+    scrn_sfc.blit(tori_sfc, tori_rct) #scrn_sfcにtori_sfcを貼り付ける。tori_rctに従って
 
     #Trueになるまで繰り返す
     while True:
