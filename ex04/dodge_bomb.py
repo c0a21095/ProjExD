@@ -23,7 +23,7 @@ def main():
     scrn_sfc.blit(tori_sfc, tori_rct) #scrn_sfcにtori_sfcを貼り付ける。tori_rctに従って
 
     bomb_sfc = pg.Surface((20, 20)) #空のsurfaceオブジェクトを作成
-    bomb_sfc.set_colorkey((0, 0, 0))
+    bomb_sfc.set_colorkey((0, 0, 0)) #背景の黒色を消す
     pg.draw.circle(bomb_sfc, (255, 0 ,0), (10, 10), 10) #円を作成。surface,色,中心,半径
     bomb_rct = bomb_sfc.get_rect() #rectを取り出す
     bomb_rct.centerx = random.randint(0, scrn_rct.width) #x座標をランダムに
@@ -45,6 +45,9 @@ def main():
         if key_dict[pg.K_DOWN] : tori_rct.centery += 1 #下方向に移動
         if key_dict[pg.K_LEFT] : tori_rct.centerx -= 1 #左方向に移動
         if key_dict[pg.K_RIGHT]: tori_rct.centerx += 1 #右方向に移動
+
+        vx, vy = +1, 1 #移動速度を設定
+        bomb_rct.move_ip(vx, vy) #爆弾をvx,vyぶん移動させる
 
         scrn_sfc.blit(tori_sfc, tori_rct) #scrn_sfcにtori_sfcを貼り付ける。tori_rctに従って
         scrn_sfc.blit(bomb_sfc, bomb_rct) #爆弾を貼り付け
