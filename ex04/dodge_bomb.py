@@ -17,15 +17,25 @@ def main():
     tori_sfc = pg.transform.rotozoom(tori_sfc, 0, 2.0) #画像の大きさを変える。画像surface,回転角,大きさの比率
     tori_rct = tori_sfc.get_rect() #rectを取り出す
     tori_rct.center = 900, 400 #400,300の位置に配置する
-    scrn_sfc.blit(tori_sfc, tori_rct) #scrn_sfcにtori_sfcを貼り付ける。tori_rctに従って
+
 
     #Trueになるまで繰り返す
     while True:
         scrn_sfc.blit(pg_bg_sfc, pg_bg_rct) #rectに従い背景を設定
+        #すべてのイベントを取得
         for event in pg.event.get():
             #×ボタンが押されたら
             if event.type == pg.QUIT:
                 return #main関数からreturnする
+        
+        key_dict = pg.key.get_pressed() #すべてのキーの入力状態に関する辞書を返す
+        if key_dict[pg.K_UP]   : tori_rct.centery -= 1 #上方向に移動
+        if key_dict[pg.K_DOWN] : tori_rct.centery += 1 #下方向に移動
+        if key_dict[pg.K_LEFT] : tori_rct.centerx -= 1 #左方向に移動
+        if key_dict[pg.K_RIGHT]: tori_rct.centerx += 1 #右方向に移動
+        
+        scrn_sfc.blit(tori_sfc, tori_rct) #scrn_sfcにtori_sfcを貼り付ける。tori_rctに従って
+
         pg.display.update() #ディスプレイ全体を更新。updateしないと表示されない
         clock.tick(1000) #1秒あたり1000フレームの時を刻む(whileに制限をかける)
 
