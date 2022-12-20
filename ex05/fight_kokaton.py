@@ -13,6 +13,7 @@ color_data = {
 
 BOMB = 5 #爆弾の数
 
+
 #画面描画のクラス
 class Screen():
     # 初期メソッド (タイトル、幅・高さタプル、背景画像ファイル名)
@@ -90,6 +91,7 @@ class Bomb():
         self.vy *= tate #移動方向を反映
         self.blit(scr) #こうかとんを描画(上記のblitメソッド呼び出し)
 
+
 #時間計測のクラス
 class Time():
     def update(self, scr:Screen):
@@ -97,6 +99,7 @@ class Time():
         self.txt = "survival time:" + str(pg.time.get_ticks()//1000) + "sec" #時間として表示する文字列を設定
         self.rct = self.fonto.render(self.txt, True, color_data["black"]) #文字をrenderする
         scr.sfc.blit(self.rct, (0, 0)) #文字を表示
+
 
 #壁判定の関数
 def check_bound(obj_rct, scr_rct):
@@ -112,6 +115,7 @@ def check_bound(obj_rct, scr_rct):
         tate = -1
     return yoko, tate
 
+
 #ゲームオーバー時に呼び出される関数
 def gameover(clock, scr:Screen):
     gmor_fonto = pg.font.Font(None, 300) #ゲームオーバーの文字の大きさを設定
@@ -121,6 +125,7 @@ def gameover(clock, scr:Screen):
     scr.sfc.blit(gmor_txt, gmor_txt_rct) #文字を貼り付け
     pg.display.update() #ディスプレイ全体を更新。updateしないと表示されない
     clock.tick(0.33) #3秒間表示
+
 
 #ゲームクリア時に呼び出される関数(未実装)
 def gameclear(clock, scr:Screen):
